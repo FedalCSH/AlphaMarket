@@ -51,6 +51,7 @@ namespace AlphaServer
             //         options.UseNpgsql(
             //           builder.Configuration.GetConnectionString("DefaultConnection")));
             app.UseHttpsRedirection();
+            // app.UseDefaultFiles();
 
             app.UseStaticFiles();
             // app.UseAuthentication();

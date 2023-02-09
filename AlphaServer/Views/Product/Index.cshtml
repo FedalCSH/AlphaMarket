@@ -30,14 +30,22 @@
                     <th>
                         Price
                     </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Price
+                    </th>
                     <th></th>
                 </tr>
             </thead>
             @foreach (var obj in Model)
             {
                 <tr>
-                    <td width="50%">@obj.Name</td>
-                    <td width="50%">@obj.Price</td>
+                    <td width="30%">@obj.Name</td>
+                    <td width="10%">@obj.Price</td>
+                    <td width="20%">@obj.Category.Name</td>
+                    <td width="20%">@obj.ApplicationType.Name</td>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
                             @*Кнопки добавить удалить*@
