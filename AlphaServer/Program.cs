@@ -51,7 +51,7 @@ namespace AlphaServer
             //         options.UseNpgsql(
             //           builder.Configuration.GetConnectionString("DefaultConnection")));
             app.UseHttpsRedirection();
-            // app.UseDefaultFiles();
+            app.UseDefaultFiles();
 
             app.UseStaticFiles();
             // app.UseAuthentication();
@@ -62,16 +62,16 @@ namespace AlphaServer
             app.UseRouting();
             app.MapDefaultControllerRoute();
             app.MapBlazorHub();
-            app.MapFallbackToPage("/_Host");
+            app.MapFallbackToPage("/Index");
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapRazorPages();
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //});
-           
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
             app.Run();
         }
     }
