@@ -33,7 +33,7 @@ namespace AlphaServer
             {
                 options.DisableImplicitFromServicesParameters = true;
             });
-            
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -62,15 +62,16 @@ namespace AlphaServer
             app.UseRouting();
             app.MapDefaultControllerRoute();
             app.MapBlazorHub();
-            app.MapFallbackToPage("/Index");
+            app.MapFallbackToPage("/_Host");
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //endpoints.MapRazorPages();
+                
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+            //});
 
             app.Run();
         }
