@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BootstrapBlazor;
+//using BootstrapBlazor;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace AlphaServer
 {
@@ -23,11 +24,35 @@ namespace AlphaServer
                 options.UseNpgsql(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI() 
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddHttpContextAccessor();
+            //builder.Services.AddAuthentication(options =>
+            //{
+            //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //})
+            //.AddCookie(options =>
+            //{
+            //    options.LoginPath = new PathString("/Identity/Account/Login");
+            //    options.AccessDeniedPath = new PathString("/Identity/Account/AccessDenied");
+            //    options.SlidingExpiration = true;
+            //});
+
+            builder.Services.AddSession(Options =>
+            {
+                Options.IdleTimeout = TimeSpan.FromMinutes(15);
+                Options.Cookie.HttpOnly = true;
+                Options.Cookie.IsEssential = true;
+            });
+            
             builder.Services.AddControllersWithViews();
             builder.Services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -54,24 +79,26 @@ namespace AlphaServer
             app.UseDefaultFiles();
 
             app.UseStaticFiles();
-            // app.UseAuthentication();
-
-            app.UseAuthorization();
-
-            app.MapControllers();
             app.UseRouting();
+            app.UseAuthentication();
+            
+            app.UseAuthorization();
+            app.UseSession();
+            app.MapControllers();
+            
             app.MapDefaultControllerRoute();
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //endpoints.MapRazorPages();
-                
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
+            });
 
             app.Run();
         }
