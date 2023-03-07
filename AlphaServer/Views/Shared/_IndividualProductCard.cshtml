@@ -1,4 +1,7 @@
 ﻿@model AlphaServer.Models.Product
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Blazorise;
+@using Microsoft.AspNetCore.Components.Web
 @using AlphaServer
 
 <div class="col-lg-4 col-md-6 pb-4 filter @Model.Category.Name.Replace(' ','_')">
@@ -6,15 +9,15 @@
     <div class="card bg-white rounded shadow-sm" style="border:1px solid #115">
         <div class="card-body px-3 pt-3 pb-1 row">
             <div class="col-7"><label class="float-left">@Model.Name</label></div>
-            <div class="col-5"><label class="float-right"><span class="text-info h5">@string.Format("RUB",Model.Price)</span> </label> </div>
+            <div class="col-5"><label class="float-right"><span class="bs-info-text h5">@string.Format("RUB",Model.Price)</span> </label> </div>
         </div>
         <img class="card-img-top img-fluid d-block mx-auto mb-3" src="@WC.ImagePath@Model.Image" alt="Card image cap">
         <div class="card-body p-1 px-3 row">
             <div class="col-6">
-                <span class="badge p-2 border w-100" style="background-color:lavenderblush">@Model.Category.Name</span>
+                <span class="badge p-2 border 100" style="background-color:darkslateblue">@Model.Category.Name</span>
             </div>
             <div class="col-6 border-0">
-                <span class="badge p-2 border w-100" style="background-color:aliceblue">@Model.ApplicationType.Name</span>
+                <span class="badge p-2 border 100" style="background-color:forestgreen">@Model.ApplicationType.Name</span>
             </div>
             <div class="col-12 pt-2" style="font-size:13px; text-align:justify">
                 <p> @Model.ShortDesc</p>

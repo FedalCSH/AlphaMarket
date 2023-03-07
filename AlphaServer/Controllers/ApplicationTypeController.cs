@@ -1,10 +1,12 @@
 ﻿using AlphaServer.Data;
 using AlphaServer.Models;
 using Blazorise.States;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlphaServer.Controllers
 {
+    [Authorize(Roles = WC.AdminRole)]
     public class ApplicationTypeController : Controller
     {
         private readonly ApplicationDbContext _db;

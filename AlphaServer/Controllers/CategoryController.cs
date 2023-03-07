@@ -1,10 +1,11 @@
 ﻿using AlphaServer.Data;
 using AlphaServer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlphaServer.Controllers
 {
-  
+    [Authorize(Roles = WC.AdminRole)]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
