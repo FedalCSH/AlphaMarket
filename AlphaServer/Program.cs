@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 //using BootstrapBlazor;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using AlphaServer.Servises;
 
 namespace AlphaServer
 {
@@ -28,6 +30,7 @@ namespace AlphaServer
                 .AddDefaultTokenProviders()
                 .AddDefaultUI() 
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();

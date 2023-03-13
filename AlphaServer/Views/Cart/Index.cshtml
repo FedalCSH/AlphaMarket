@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AlphaServer.Models.Product>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.AspNetCore.Components.Web
-@BodyContent
+
 @{
     Layout = "_ViewImports";
 }
@@ -17,15 +17,15 @@
                 <div class="card mt-4">
                     <div class="card-header bg-dark text-light ml-0 row container">
                         <div class="col-6">
-                            <i class="bi bi-cart4"></i>;
+                            <i class="bi bi-cart4"></i>
                             Корзина покупок
                         </div>
-                        <div class="col-6 text-right">
-                            <a asp-action="Index" asp-controller="HomeController" class="btn btn-outline-info btn-sm">Продолжить покупки</a>
+                        <div class="col-6 text-md-end">
+                            <a href="Home/Index" class="btn btn-outline-info btn-sm">Продолжить покупки</a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class=" d-none d-lg-block">
+                        <div class="d-none d-lg-block">
                             <div class="row" style="color:#821f3d">
                                 <div class="col-lg-2">
                                 </div>
@@ -46,7 +46,7 @@
                         
                         <div class="row h-100">
                             <div class="col-4 col-md-2 text-center py-2">
-                                <img src="@AlphaServer.WC.ImagePath@obj.Image" class="rounded" max-width ="70%" />
+                                <img src="@AlphaServer.WC.ImagePath@obj.Image" width="100" class="rounded-sm" />
                             </div>
                             <div class="col-8 col-lg-7">
                                 <h5>@obj.Name</h5>

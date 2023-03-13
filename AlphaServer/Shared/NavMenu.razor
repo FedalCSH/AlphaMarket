@@ -1,7 +1,8 @@
 ﻿@inject IHttpContextAccessor HttpContextAccessor
 @using AlphaServer.Servises;
-@using Microsoft.AspNetCore.Http
-@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Components.Web;
+
 
 @*<div class="top-row ps-3 navbar navbar-light">
     <div class="container-fluid">
@@ -42,6 +43,7 @@
     </nav>
 </div>*@
 
+    
 <nav class="navbar me-auto navbar-expand-sm bg-info-subtle">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">AlphaMarket</a>
@@ -56,8 +58,12 @@
                 </li>
                 @*<li class="nav-item">
                     <a class="nav-link" href="Product/Index">Товары</a>
-                </li>
-                    *@         
+                </li>*@
+
+               <AuthorizeView> 
+                @if (@context.User.IsInRole(WC.AdminRole))
+                {                
+                
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Admin Panel
@@ -70,7 +76,9 @@
                         <li><a class="nav-link" href="Identity/Account/Register">New Admin</a></li>
                         </ul>
                     </li>
-                <li>
+                }
+                </AuthorizeView>
+                <li>                    
                     @if (HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WC.SessionCart) != null)
                     {
                         <a href="Cart/Index" class="nav-link">
@@ -97,15 +105,19 @@
                 <li class="nav-item">
                     <a class="nav-link disabled">Disabled</a>
                 </li>
+    
+                
                 <li class="nav-item">
                     <AlphaServer.Shared.LoginDisplay />
                 </li>
+                
                 
             </ul>            
         </div>
         
     </div>
 </nav>
+
 
 @code {
     private bool collapseNavMenu = true;
