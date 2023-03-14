@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlphaMarket", "AlphaMarket\AlphaMarket.csproj", "{A1844C86-2D65-4483-B3E0-FDB0CFE8BAA6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlphaServer", "AlphaServer\AlphaServer.csproj", "{C2070EC9-E080-45B0-AB31-2B5D542EE690}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{10A376A4-A57C-443E-907A-845018AF7204}"
@@ -18,10 +16,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A1844C86-2D65-4483-B3E0-FDB0CFE8BAA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1844C86-2D65-4483-B3E0-FDB0CFE8BAA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1844C86-2D65-4483-B3E0-FDB0CFE8BAA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1844C86-2D65-4483-B3E0-FDB0CFE8BAA6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C2070EC9-E080-45B0-AB31-2B5D542EE690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2070EC9-E080-45B0-AB31-2B5D542EE690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2070EC9-E080-45B0-AB31-2B5D542EE690}.Release|Any CPU.ActiveCfg = Release|Any CPU
