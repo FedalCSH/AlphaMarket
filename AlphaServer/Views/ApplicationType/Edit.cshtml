@@ -8,7 +8,7 @@
     <input asp-for="Id" hidden />
     <div class="border p-3">
         <div class="form-group row">
-            <h2 class="text-info pl-3">Edit ApplicationType</h2>
+            <h2 class="text-info pl-3">Редактировать</h2>
         </div>
         <div class="row">
             <div class="col-8">
@@ -39,7 +39,7 @@
                             <input type="submit" class="btn btn-info w-100" value="Update" />                                                          
                         </div>
                         <div class="col">
-                            <a href="/ApplicationType" class="btn btn-success w-100">
+                            <a href="ApplicationType/Index" class="btn btn-success w-100">
                                 <i class="bi bi-box-arrow-left"></i>
                             </a>
                         </div>
@@ -53,3 +53,10 @@
     </div>
 
 </form>
+@section Scripts{
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+}

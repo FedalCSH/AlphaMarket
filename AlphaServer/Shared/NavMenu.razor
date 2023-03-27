@@ -2,59 +2,18 @@
 @using AlphaServer.Servises;
 @using Microsoft.AspNetCore.Http;
 @using Microsoft.AspNetCore.Components.Web;
-
-
-@*<div class="top-row ps-3 navbar navbar-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AlphaServer</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="false"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="ApplicationType/Index">
-                <span class="oi oi-list-rich" aria-hidden="false"></span> Application Type
-            </NavLink>
-        </div>
-                
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="false"></span> Fetch data
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Category/Index">
-                <span class="oi oi-list-rich" aria-hidden="false"></span> Category
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Product/Index">
-                <span class="oi oi-list-rich" aria-hidden="false"></span> Product
-            </NavLink>
-        </div>        
-    </nav>
-</div>*@
-
     
-<nav class="navbar me-auto navbar-expand-sm bg-info-subtle">
+<nav class="navbar navbar-expand-sm bg-dark-subtle">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">AlphaMarket</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="#navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         
-            <div class="collapse.navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="Home/Index">Home</a>
+                    <a class="nav-link active" aria-current="page" href="Home/Index">Главная</a>
                 </li>
                 @*<li class="nav-item">
                     <a class="nav-link" href="Product/Index">Товары</a>
@@ -64,18 +23,18 @@
                 @if (@context.User.IsInRole(WC.AdminRole))
                 {                
                 
-                    <li class="nav-item dropdown">
+                    <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Admin Panel
+                        Панель администратора
                     </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item active" href="Category/Index">Категории товаров</a></li>
                         <li><a class="dropdown-item" href="ApplicationType/Index">Тип товров</a></li>
-                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="Product/Index">Товары</a></li>
-                        <li><a class="nav-link" href="Identity/Account/Register">New Admin</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="nav-link" href="Identity/Account/Register">Новый админ</a></li>
                         </ul>
-                    </li>
+                    </div>
                 }
                 </AuthorizeView>
                 <li>                    
@@ -85,36 +44,40 @@
                             @{
                                 var count = HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WC.SessionCart).Count;
                             }
-                            <i class="bi bi-cart4"></i> &nbsp; (@count)
+                            <i class="fa-solid fa-cart-shopping fa-beat fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Корзина"></i> &nbsp; (@count)
                         </a>
                     }
                     else
                     {
                         <a href="Cart/Index" class="nav-link">
-                            <i class="bi bi-cart4"></i> &nbsp; (0)
+                            <i class="fa-solid fa-cart-shopping fa-beat fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Корзина"></i> &nbsp; (0)
                         </a>
                     }
-                </li>
-                
-
-
-               
-
-
+                </li> 
 
                 <li class="nav-item">
                     <a class="nav-link disabled">Disabled</a>
-                </li>
-    
-                
-                <li class="nav-item">
-                    <AlphaServer.Shared.LoginDisplay />
-                </li>
+                </li>   
                 
                 
-            </ul>            
-        </div>
-        
+            </ul>
+            <div class="nav-item ms-auto justify-content-end">
+                <ul class="navbar-nav">
+                    <AuthorizeView>
+                        <Authorized>
+                            <li><a class="nav-link active" href="Identity/Account/Manage"><i class="fa-solid fa-id-card fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Личный кабинет"></i></a></li>
+                            <li><form method="post" action="Identity/Account/Logout">
+                                    <button type="submit" class="nav-link btn btn-link"><i class="fas fa-door-open fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Выйти из учетной записи"></i></button>
+                            </form></li>
+                        </Authorized>
+                        <NotAuthorized>
+                            <li><a href="Identity/Account/Register"><i class="fa-solid fa-user-plus fa-lg"></i></a></li>
+                            <li><a href="Identity/Account/Login"><i class="fa-solid fa-right-to-bracket fa-shake fa-lg"></i></a></li>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </ul>
+            </div>
+        </div>        
     </div>
 </nav>
 
