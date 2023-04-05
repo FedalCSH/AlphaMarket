@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using AlphaServer.Servises;
 
 namespace AlphaServer.Areas.Identity.Pages.Account
 {
@@ -20,9 +21,9 @@ namespace AlphaServer.Areas.Identity.Pages.Account
     public class ResendEmailConfirmationModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly EmailService _emailSender;
 
-        public ResendEmailConfirmationModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ResendEmailConfirmationModel(UserManager<IdentityUser> userManager, EmailService emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

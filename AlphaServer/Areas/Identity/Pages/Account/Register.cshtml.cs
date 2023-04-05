@@ -11,6 +11,7 @@ using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using AlphaServer.Models;
+using AlphaServer.Servises;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -29,7 +30,7 @@ namespace AlphaServer.Areas.Identity.Pages.Account
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly EmailService _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
@@ -37,7 +38,7 @@ namespace AlphaServer.Areas.Identity.Pages.Account
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
+            EmailService emailSender,
             RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
@@ -163,7 +164,7 @@ namespace AlphaServer.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        $"Подтвердите ваш аккаунт по ссылке <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -198,6 +199,7 @@ namespace AlphaServer.Areas.Identity.Pages.Account
         //            $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
         //    }
         //}
+
 
         private IUserEmailStore<IdentityUser> GetEmailStore()
         {

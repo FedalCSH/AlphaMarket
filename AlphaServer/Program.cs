@@ -27,10 +27,10 @@ namespace AlphaServer
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
-                .AddDefaultTokenProviders()
                 .AddDefaultUI() 
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Services.AddTransient<IEmailSender, EmailSender>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            builder.Services.AddTransient<EmailService>();
 
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();

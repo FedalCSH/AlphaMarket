@@ -9,9 +9,9 @@
     Layout = "_ViewImports";
 }
 
-<body>
+<body bg-light>
 
-<div class="container">
+    <div class="container">
     <div class="text-center">
             <button class="btn btn-dark filter-button" data-filter="all">Все товары</button>
             @foreach (var obj in @Model.Categories)
@@ -31,6 +31,33 @@
     </div>
 </div>
 </body>
+<footer class="page-footer font-small bg-dark text-light pt-5">
+    <div class="container text-center text-md-left">
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+                <h5 class="text-uppercase font-weight-bold"></h5>
+                <p>
+                    Сайт сделан на фреймворке .NET 7 Blazor Server с подключением базы данных PostgreSQL.
+                    Размещен на VPS под управлением CentOS 7.
+                    Данный сайт изначально создавался в качестве учебного проекта, но на данный момент это практически полностью работающий интернет магазин.
+                    На данный момент разрабатывается подключение email, sms и платежной системы.
+                </p>
+            </div>
+            <hr class="clearfix w-100 d-md-none pb-3">
+            <div class="col-md-6 mb-md-0 mb-3">
+                <h5 class="text-uppercase font-weight-bold"></h5>
+                <p>
+                    Данный сайт вы можете купить с последующей поддержкой.
+                    Все вопросы по тел. +79253779197 или email userrootovich@yahoo.com
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright text-center py-3">
+        © 2023 Copyright:
+        <a href="http://www.trendamrket.site/">Alexey Fedorov</a>
+    </div>
+</footer>
 
 @section Scripts {
     <script>
