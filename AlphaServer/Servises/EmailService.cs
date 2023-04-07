@@ -12,6 +12,13 @@ namespace AlphaServer.Servises
 {
     public class EmailService
     {
+        private readonly IConfiguration _configuration;
+        public EmailSettings _emailSettings { get; set; }
+        public EmailService(IConfiguration configuration)
+        {
+            _configuration = configuration;            
+        }
+
         public async Task SendEmailAsync(string email, string subject, string message)
         {
             using var emailMessage = new MimeMessage();
@@ -26,13 +33,13 @@ namespace AlphaServer.Servises
             //25 110/ 465 /587/ 993
             using (var client = new SmtpClient(new ProtocolLogger("smtp.log")))
             {
+                _emailSettings = _configuration.GetSection("MailService").Get<EmailSettings>();
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
                 client.CheckCertificateRevocation = false;
                 client.SslProtocols = SslProtocols.Ssl3 | SslProtocols.Ssl2 | SslProtocols.Tls | SslProtocols.Ssl2 | SslProtocols.Tls12 | SslProtocols.Tls13;
                 await client.ConnectAsync("mail.trendmarket.site", 465, false);
 
-                await client.AuthenticateAsync("noreply", "sync533b");
-                //("VXNlcm5hbWU6", "UGFzc3dvcmQ6");
+                await client.AuthenticateAsync(_emailSettings.emailusername, _emailSettings.emailpassword);
                 await client.SendAsync(emailMessage);
                 await client.DisconnectAsync(true);                
             }

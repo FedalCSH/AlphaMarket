@@ -1,6 +1,5 @@
 ﻿using AlphaServer.Data;
 using AlphaServer.Models;
-using Blazorise.States;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,9 +28,13 @@ namespace AlphaServer.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(ApplicationType obj)
         {
-            _db.ApplicationType.Add(obj);
+            if (ModelState.IsValid) 
+            { 
+                _db.ApplicationType.Add(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
+            }
+            return View(obj);
         }
         //GET - EDIT
         public IActionResult Edit(int? id)

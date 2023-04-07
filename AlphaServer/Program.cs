@@ -37,6 +37,7 @@ namespace AlphaServer
             builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddHttpContextAccessor();
+            /////////////
             //builder.Services.AddAuthentication(options =>
             //{
             //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -48,7 +49,7 @@ namespace AlphaServer
             //    options.AccessDeniedPath = new PathString("/Identity/Account/AccessDenied");
             //    options.SlidingExpiration = true;
             //});
-
+            //////////////////////////////////
             builder.Services.AddSession(Options =>
             {
                 Options.IdleTimeout = TimeSpan.FromMinutes(15);

@@ -13,7 +13,6 @@ namespace AlphaServer.Controllers
         {
             _db = db;
         }
-
         public IActionResult Index()
         {
             IEnumerable<Category> objList = _db.Category;
