@@ -59,20 +59,21 @@
                     <a class="nav-link disabled">Disabled</a>
                 </li>
             </ul>
-            <div class="nav-item ms-auto align-self-center justify-content-end">
-                <ul class="navbar-nav ms-auto align-self-center">
+            <div class="nav-item ms-auto">
+                <ul class="navbar-nav">
                     <AuthorizeView>
                         <Authorized>
                             <li>
-                                <a class="nav-link" href="Identity/Account/Manage">@context.User.Identity?.Name<i class="fa-solid fa-user-pen fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Личный кабинет"></i></a>
+                             <a class="nav-link" href="Identity/Account/Manage">@context.User.Identity?.Name<i class="fa-solid fa-user-pen fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Личный кабинет"></i></a>
                             </li>
                             <li>
-                                <form method="post" action="Identity/Account/Logout"><button type="submit" class="nav-link btn btn-link"><i class="fas fa-door-open fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Выйти из учетной записи"></i></button>
-                            </form>
+                              <form method="post" action="Identity/Account/Logout">
+                                    <button type="submit" class="nav-link btn btn-link pt-3"><i class="fas fa-door-open fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Выйти из учетной записи"></i></button>
+                              </form>
                             </li>
                         </Authorized>
                         <NotAuthorized>
-                            <li><a href="Identity/Account/Login"><i class="fa-solid fa-right-to-bracket fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Войти"></i></a></li>@*&nbsp;&nbsp;*@
+                            <li><a href="Identity/Account/Login"><i class="fa-solid fa-right-to-bracket fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Войти"></i></a></li>&nbsp;&nbsp;
                             <li><a href="Identity/Account/Register"><i class="fa-solid fa-user-plus fa-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="Регистрация"></i></a></li>
                         </NotAuthorized>
                     </AuthorizeView>

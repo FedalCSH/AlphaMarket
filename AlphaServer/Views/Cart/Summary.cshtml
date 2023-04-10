@@ -62,13 +62,15 @@
                                         <span class="text-info">Всего по заказу:</span>
                                     </h4>
                                     <ul class="list-group mb-3">
-                                        @foreach (var obj in Model.ProductList)
+                                        @for (int i=0; i< Model.ProductList.Count();i++)
                                         {                                         
-                                        
+                                        <input type="hidden" asp-for="@Model.ProductList[i].Id"/>
+                                            <input type="hidden" asp-for="@Model.ProductList[i].Name" />
+
                                         <li class="list-group-item d-flex justify-content-between">
                                             <div>
-                                                <h6 class="my-0">@obj.Name</h6>
-                                                <small class="text-muted">Цена: @obj.Price RUB</small>
+                                                    <h6 class="my-0">@Model.ProductList[i].Id</h6>
+                                                    <small class="text-muted">Цена: @Model.ProductList[i].Price RUB</small>
                                             </div>
                                         </li>
                                         }
