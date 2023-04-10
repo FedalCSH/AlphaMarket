@@ -1,5 +1,5 @@
 using AlphaServer.Areas.Identity;
-using AlphaServer.Data;
+using AlphaMarket_DataAccess.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 //using BootstrapBlazor;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using AlphaServer.Servises;
+using AlphaMarket_Services;
 
 namespace AlphaServer
 {
@@ -35,7 +35,7 @@ namespace AlphaServer
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-            builder.Services.AddSingleton<WeatherForecastService>();
+           // builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddHttpContextAccessor();
             /////////////
             //builder.Services.AddAuthentication(options =>

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using AlphaServer.Servises;
+using AlphaMarket_Services;
 
 namespace AlphaServer.Areas.Identity.Pages.Account
 {

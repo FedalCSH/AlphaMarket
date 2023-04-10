@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using AlphaServer.Data;
-using AlphaServer.Models;
-using AlphaServer.Models.ViewModels;
+using AlphaMarket_DataAccess.Data;
+using AlphaMarket_Models;
+using AlphaMarket_Models.ViewModels;
+using AlphaMarket_Services;
 
 namespace AlphaServer.Controllers
 {

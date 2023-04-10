@@ -1,7 +1,8 @@
-﻿using AlphaServer.Data;
-using AlphaServer.Models;
+﻿using AlphaMarket_Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using AlphaMarket_Services;
+using AlphaMarket_DataAccess.Data;
 
 namespace AlphaServer.Controllers
 {

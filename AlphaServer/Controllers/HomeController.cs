@@ -1,7 +1,7 @@
-﻿using AlphaServer.Data;
-using AlphaServer.Models;
-using AlphaServer.Models.ViewModels;
-using AlphaServer.Servises;
+﻿using AlphaMarket_DataAccess.Data;
+using AlphaMarket_Models;
+using AlphaMarket_Models.ViewModels;
+using AlphaMarket_Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

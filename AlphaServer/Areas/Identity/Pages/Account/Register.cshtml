@@ -1,9 +1,10 @@
 ﻿@page
 @model RegisterModel
+@using AlphaMarket_Services;
 @{
     Layout = "~/Views/Shared/_ViewImports.cshtml";
 }
-@if (User.IsInRole(AlphaServer.WC.AdminRole))
+@if (User.IsInRole(WC.AdminRole))
 {
     <h1>Регистрация нового администратора</h1>
 }
@@ -43,7 +44,7 @@ else
                 <label asp-for="Input.ConfirmPassword">Повторите пароль</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            @if (User.IsInRole(AlphaServer.WC.AdminRole))
+            @if (User.IsInRole(WC.AdminRole))
             {
                 <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-warning">Регистрация НОВОГО АДМИНИСТРАТОРА</button>
             }

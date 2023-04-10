@@ -1,13 +1,12 @@
-﻿using AlphaServer.Data;
-using AlphaServer.Models;
-using AlphaServer.Models.ViewModels;
-using AlphaServer.Servises;
-using Blazorise;
+﻿using AlphaMarket_DataAccess.Data;
+using AlphaMarket_Models;
+using AlphaMarket_Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using System.Security.Claims;
 using System.Text;
+using AlphaMarket_Services;
 
 namespace AlphaServer.Controllers
 {

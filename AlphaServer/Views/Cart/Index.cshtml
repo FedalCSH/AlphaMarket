@@ -1,7 +1,7 @@
-﻿@model IEnumerable<AlphaServer.Models.Product>
+﻿@model IEnumerable<AlphaMarket_Models.Product>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.AspNetCore.Components.Web
-
+@using AlphaMarket_Services
 @{
     Layout = "_ViewImports";
 }
@@ -46,7 +46,7 @@
                         
                         <div class="row h-100">
                             <div class="col-4 col-md-2 text-center py-2">
-                                <img src="@AlphaServer.WC.ImagePath@obj.Image" width="100" class="rounded-sm" />
+                                <img src="@WC.ImagePath@obj.Image" width="100" class="rounded-sm" />
                             </div>
                             <div class="col-8 col-lg-7">
                                 <h5>@obj.Name</h5>
