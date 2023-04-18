@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using AlphaMarket_Services;
+using AlphaMarket_DataAccess.Repository.IRepository;
+using AlphaMarket_DataAccess.Repository;
 
 namespace AlphaServer
 {
@@ -62,6 +64,12 @@ namespace AlphaServer
             {
                 options.DisableImplicitFromServicesParameters = true;
             });
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IInquiryDetailRepository, InquiryDetailRepository>();
+            builder.Services.AddScoped<IInquiryHeaderRepository, InquiryHeaderRepository>();
+            builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 
             var app = builder.Build();
 
@@ -93,6 +101,7 @@ namespace AlphaServer
             app.MapDefaultControllerRoute();
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             app.UseEndpoints(endpoints =>
             {

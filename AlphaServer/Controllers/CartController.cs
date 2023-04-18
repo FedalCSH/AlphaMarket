@@ -7,21 +7,30 @@ using MimeKit;
 using System.Security.Claims;
 using System.Text;
 using AlphaMarket_Services;
+using AlphaMarket_DataAccess.Repository.IRepository;
 
 namespace AlphaServer.Controllers
 {
     [Authorize]
     public class CartController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly EmailService _emailSender;
+        private readonly IApplicationUserRepository _userRepo;
+        private readonly IProductRepository _prodRepo;
+        private readonly IInquiryDetailRepository _inqDRepo;
+        private readonly IInquiryHeaderRepository _inqHRepo;
 
         [BindProperty]
         public ProductUserVM ProductUserVM { get; set; }
-        public CartController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, EmailService emailSender)
+        public CartController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, EmailService emailSender,
+            IApplicationUserRepository userRepo, IProductRepository prodRepo, IInquiryDetailRepository inqDRepo, IInquiryHeaderRepository inqHRepo)
         {
-            _db = db;
+            _userRepo = userRepo;
+            _prodRepo = prodRepo;
+            _inqDRepo = inqDRepo;
+            _inqHRepo = inqHRepo;
             _webHostEnvironment = webHostEnvironment;
             _emailSender = emailSender;
         }
@@ -35,7 +44,7 @@ namespace AlphaServer.Controllers
 
             }
             List <int> prodInCart = shoppingCartList.Select(i => i.ProductId).ToList();
-            IEnumerable<Product> prodList = _db.Product.Where(u=>prodInCart.Contains(u.Id));
+            IEnumerable<Product> prodList = _prodRepo.GetAll(u=>prodInCart.Contains(u.Id));
 
             return View(prodList);
         }
@@ -61,11 +70,11 @@ namespace AlphaServer.Controllers
 
             }
             List<int> prodInCart = shoppingCartList.Select(i => i.ProductId).ToList();
-            IEnumerable<Product> prodList = _db.Product.Where(u => prodInCart.Contains(u.Id));
+            IEnumerable<Product> prodList = _prodRepo.GetAll(u => prodInCart.Contains(u.Id));
 
             ProductUserVM = new ProductUserVM()
             {
-                ApplicationUser = _db.ApplicationUser.FirstOrDefault(u => u.Id == claim.Value),
+                ApplicationUser = _userRepo.FirstOrDefault(u => u.Id == claim.Value),
                 ProductList = prodList.ToList()
             };
 
@@ -77,6 +86,9 @@ namespace AlphaServer.Controllers
         [ActionName("Summary")]
         public async Task <IActionResult> SummaryPost(ProductUserVM ProductUserVM)
         {
+            var claimsIdentity =(ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
             var PathToTemplate = _webHostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString()
                 + "templates" + Path.DirectorySeparatorChar.ToString() +
                 "Inquiry.html";
@@ -102,7 +114,29 @@ namespace AlphaServer.Controllers
                                                          productListSB.ToString());
 
             await _emailSender.SendEmailAsync(WC.EmailAdmin, subject, messageBody);
-            
+
+            InquiryHeader inquiryHeader = new InquiryHeader()
+            {
+                    ApplicationUserId = claim.Value,
+                    FullName=ProductUserVM.ApplicationUser.FullName,
+                    Email = ProductUserVM.ApplicationUser.Email,
+                    PhoneNumber = ProductUserVM.ApplicationUser.PhoneNumber,
+                    InquiryDate=DateTime.Now
+
+            };
+            _inqHRepo.Add(inquiryHeader);
+            _inqHRepo.Save();
+            foreach (var prod in ProductUserVM.ProductList)
+            {
+                InquiryDetails inquiryDetails = new InquiryDetails()
+                {
+                    InquiryHeaderId = inquiryHeader.Id,
+                    ProductId = prod.Id
+                };
+                _inqDRepo.Add(inquiryDetails);
+            }
+            _inqDRepo.Save();
+
             return RedirectToAction(nameof(InquiryConfirmation));
         }
         public IActionResult InquiryConfirmation()

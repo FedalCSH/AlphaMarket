@@ -12,9 +12,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlphaMarket_Services", "AlphaMarket_Services\AlphaMarket_Services.csproj", "{466B42E7-B3DF-413F-A7D9-6F87C21B8411}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlphaMarket_Models", "AlphaMarket_Models\AlphaMarket_Models.csproj", "{4321BCFE-9EDF-425A-8BA7-950C110CAD9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlphaMarket_Models", "AlphaMarket_Models\AlphaMarket_Models.csproj", "{4321BCFE-9EDF-425A-8BA7-950C110CAD9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlphaMarket_DataAccess", "AlphaMarket_DataAccess\AlphaMarket_DataAccess.csproj", "{BECE754C-378D-4B36-BEEC-E00623B8CD75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlphaMarket_DataAccess", "AlphaMarket_DataAccess\AlphaMarket_DataAccess.csproj", "{BECE754C-378D-4B36-BEEC-E00623B8CD75}"
+	ProjectSection(ProjectDependencies) = postProject
+		{466B42E7-B3DF-413F-A7D9-6F87C21B8411} = {466B42E7-B3DF-413F-A7D9-6F87C21B8411}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

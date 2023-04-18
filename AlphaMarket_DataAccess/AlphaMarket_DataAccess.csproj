@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AlphaMarket_Models\AlphaMarket_Models.csproj" />
+    <ProjectReference Include="..\AlphaMarket_Services\AlphaMarket_Services.csproj" />
   </ItemGroup>
 
 </Project>

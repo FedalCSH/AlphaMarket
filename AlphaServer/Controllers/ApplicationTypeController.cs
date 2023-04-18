@@ -3,20 +3,21 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AlphaMarket_Services;
 using AlphaMarket_DataAccess.Data;
+using AlphaMarket_DataAccess.Repository.IRepository;
 
 namespace AlphaServer.Controllers
 {
     [Authorize(Roles = WC.AdminRole)]
     public class ApplicationTypeController : Controller
     {
-        private readonly ApplicationDbContext _db;
-            public ApplicationTypeController(ApplicationDbContext db)
+        private readonly IApplicationTypeRepository _appTypeRepo;
+            public ApplicationTypeController(IApplicationTypeRepository appTypeRepo)
             {
-            _db = db;
+            _appTypeRepo = appTypeRepo;
             }
         public IActionResult Index()
         {
-            IEnumerable<ApplicationType> objlist = _db.ApplicationType;
+            IEnumerable<ApplicationType> objlist = _appTypeRepo.GetAll();
             return View(objlist);
         }
         //get create
@@ -30,9 +31,9 @@ namespace AlphaServer.Controllers
         public IActionResult Create(ApplicationType obj)
         {
             if (ModelState.IsValid) 
-            { 
-                _db.ApplicationType.Add(obj);
-            _db.SaveChanges();
+            {
+                _appTypeRepo.Add(obj);
+                _appTypeRepo.Save();
             return RedirectToAction("Index");
             }
             return View(obj);
@@ -44,7 +45,7 @@ namespace AlphaServer.Controllers
             {
                 return NotFound();
             }
-            var obj = _db.ApplicationType.Find(id);
+            var obj = _appTypeRepo.Find(id.GetValueOrDefault());
             if (obj == null)
             {
                 return NotFound();
@@ -58,8 +59,8 @@ namespace AlphaServer.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.ApplicationType.Update(obj);
-                _db.SaveChanges();
+                _appTypeRepo.Update(obj);
+                _appTypeRepo.Save();
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -71,7 +72,7 @@ namespace AlphaServer.Controllers
             {
                 return NotFound();
             }
-            var obj = _db.ApplicationType.Find(id);
+            var obj = _appTypeRepo.Find(id.GetValueOrDefault());
             if (obj == null)
             {
                 return NotFound();
@@ -83,13 +84,13 @@ namespace AlphaServer.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var obj = _db.ApplicationType.Find(id);
+            var obj = _appTypeRepo.Find(id.GetValueOrDefault());
             if (id == null)
             {
                 return NotFound();
             }
-            _db.ApplicationType.Remove(obj);
-            _db.SaveChanges();
+            _appTypeRepo.Remove(obj);
+            _appTypeRepo.Save();
             return RedirectToAction("Index");
         }
     }                    

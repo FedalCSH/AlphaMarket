@@ -14,5 +14,7 @@ namespace AlphaMarket_Services
         public const string AdminRole = "Admin";
         public const string CustomerRole = "Customer";
         public static string EmailAdmin = "userrootovich@yahoo.com";
+        public static string CategoryName = "CategoryName";
+        public static string ApplicationTypeName = "ApplicationTypeName";
     }
 }

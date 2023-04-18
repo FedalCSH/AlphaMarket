@@ -1,4 +1,5 @@
 ﻿using AlphaMarket_DataAccess.Data;
+using AlphaMarket_DataAccess.Repository.IRepository;
 using AlphaMarket_Models;
 using AlphaMarket_Models.ViewModels;
 using AlphaMarket_Services;
@@ -11,10 +12,12 @@ namespace AlphaServer.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public HomeController(ApplicationDbContext db)
+        private readonly IProductRepository _prodRepo;
+        private readonly ICategoryRepository _catRepo;
+        public HomeController(IProductRepository prodRepo, ICategoryRepository catRepo)
         {
-            _db = db;
+            _prodRepo = prodRepo;
+            _catRepo = catRepo;
         }
         [HttpGet]
 
@@ -22,8 +25,8 @@ namespace AlphaServer.Controllers
         {
             HomeVM homeVM = new HomeVM()
             {
-                Products = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType),
-                Categories = _db.Category
+                Products = _prodRepo.GetAll(includeProperties: "Category,ApplicationType"),
+                Categories = _catRepo.GetAll()
             };
             return View(homeVM);
         }
@@ -37,8 +40,7 @@ namespace AlphaServer.Controllers
             }
             DetailsVM DetailsVM = new DetailsVM()
             {
-                Product = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType)
-                            .Where(u => u.Id == id).FirstOrDefault(),
+                Product = _prodRepo.FirstOrDefault(u=>u.Id==id,includeProperties: "Category,ApplicationType"),
                 ExistInCart = false
             };
 
