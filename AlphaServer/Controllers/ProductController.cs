@@ -130,7 +130,7 @@ namespace AlphaServer.Controllers
                 }
                 _prodRepo.Update(productVM.Product);
             }
-
+            TempData[WC.Success] = "OK";
             _prodRepo.Save();
             return RedirectToAction("Index");
         
@@ -194,6 +194,7 @@ namespace AlphaServer.Controllers
 
 
             _prodRepo.Remove(obj);
+            TempData[WC.Success] = "OK";
             _prodRepo.Save();
             return RedirectToAction("Index");
 

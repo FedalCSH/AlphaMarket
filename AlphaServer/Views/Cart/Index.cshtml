@@ -12,8 +12,9 @@
 <form method="post">
     <br />
     <div class="backgroundWhiteBorder">
-        <div class="container row">
-            <div class="col-8">
+            <div class="container-fluid">
+                <div class="row justify-content-md-center">
+                    <div class="col-8 col-md-auto">
                 <div class="card mt-3">
                     <div class="card-header bg-dark text-light ms-0 row container">
                         <div class="col-6">
@@ -29,12 +30,18 @@
                             <div class="row" style="color:#821f3d">
                                 <div class="col-lg-2">
                                 </div>
-                                <div class="col-12 col-lg-7">
+                                <div class="col-12 col-lg-3">
                                     Описание
                                 </div>
                                 <div class="col-12 col-lg-2">
                                     Цена
                                 </div>
+                                    <div class="col-6 col-lg-2">
+                                        Количество
+                                    </div>
+                                    <div class="col-6 col-lg-2">
+                                        Итого цена
+                                    </div>
                                 <div class="col-6 col-sm-4 col-lg-1">
                                 </div>
                             </div>
@@ -48,7 +55,7 @@
                             <div class="col-4 col-md-2 text-center py-2">
                                 <img src="@WC.ImagePath@obj.Image" width="100" class="rounded-sm" />
                             </div>
-                            <div class="col-8 col-lg-7">
+                            <div class="col-8 col-lg-3">
                                 <h5>@obj.Name</h5>
                                 <div style="font-size:11px;">@obj.ShortDesc</div>
                             </div>
@@ -56,9 +63,17 @@
                                 <span style="font-size:17px;"> @obj.Price RUB</span>
 
                             </div>
+                                    <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
+                                     <input type="text" asp-for="@obj.TempItem" class="form-control"/>   
+
+                                    </div>
+                                    <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
+                                        <span style="font-size:17px;"> @(obj.Price*obj.TempItem) RUB</span>
+
+                                    </div>
                             <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
-                                <a asp-action="Remove" asp-route-id="@obj.Id" class="btn-outline-danger">
-                                        <i class="bi bi-trash3-fill"></i>
+                                <a asp-action="Remove" asp-route-id="@obj.Id" class="btn btn-outline-danger">
+                                        <i class="fas fa-trash"></i>
                                 </a>
                             </div>
                         </div>
@@ -68,7 +83,7 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-6 col-md-3 offset-md-9">
-                                <button type="submit" class="btn btn-success form-control ">
+                                <button type="submit" class="btn btn-success form-control">
                                     <span>Продолжить</span>
                                 </button>
                             </div>
@@ -76,6 +91,7 @@
                     </div>
                 </div>
             </div>
+                </div>
         </div>
     </div>
 </form>

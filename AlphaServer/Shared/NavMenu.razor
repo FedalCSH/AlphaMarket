@@ -23,7 +23,7 @@
                 @if (@context.User.IsInRole(WC.AdminRole))
                 {                
                 
-                        <div class="nav-item dropdown me-auto align-self-center">
+                  <div class="nav-item dropdown me-auto align-self-center">
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-screwdriver-wrench fa-lg"></i>
                     </a>
@@ -34,7 +34,16 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="nav-link" href="Identity/Account/Register">Новый админ</a></li>
                         </ul>
-                    </div>
+                  </div>
+                        <div class="nav-item dropdown me-auto align-self-center">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i>Управление заказами/запросами</i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item active" href="Inquiry/Index">Список запросов</a></li>
+
+                            </ul>
+                        </div>
                 }
                 </AuthorizeView>
                 <li>                    

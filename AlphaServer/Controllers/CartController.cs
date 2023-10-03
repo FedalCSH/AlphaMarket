@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using AlphaMarket_Services;
 using AlphaMarket_DataAccess.Repository.IRepository;
+using Microsoft.Extensions.Azure;
 
 namespace AlphaServer.Controllers
 {
@@ -44,7 +45,15 @@ namespace AlphaServer.Controllers
 
             }
             List <int> prodInCart = shoppingCartList.Select(i => i.ProductId).ToList();
-            IEnumerable<Product> prodList = _prodRepo.GetAll(u=>prodInCart.Contains(u.Id));
+            IEnumerable<Product> prodListTemp = _prodRepo.GetAll(u=>prodInCart.Contains(u.Id));
+            IList<Product> prodList = new List<Product>();
+
+            foreach (var cartObj in shoppingCartList)
+            {
+                Product prodTemp = prodListTemp.FirstOrDefault(u => u.Id == cartObj.ProductId);
+                prodTemp.TempItem = cartObj.Item;
+                prodList.Add(prodTemp);
+            }
 
             return View(prodList);
         }

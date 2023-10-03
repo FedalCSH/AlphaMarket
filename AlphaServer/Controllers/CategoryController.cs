@@ -38,8 +38,10 @@ namespace AlphaServer.Controllers
             {
                 _catRepo.Add(obj);
                 _catRepo.Save();
+                TempData[WC.Success] = "Новая категория создана успешно";
                 return RedirectToAction("Index");
             }
+            TempData[WC.Error] = "При создании категории произошла ошибка";
             return View(obj);
         }
         //GET - EDIT
@@ -64,9 +66,11 @@ namespace AlphaServer.Controllers
             if (ModelState.IsValid)
             {
                 _catRepo.Update(obj);
+                TempData[WC.Success] = "Категория изменена успешно";
                 _catRepo.Save();
                 return RedirectToAction("Index");
             }
+            TempData[WC.Error] = "При обновлении произошла ошибка";
             return View(obj);
         }
         //GET - Delete
@@ -93,9 +97,10 @@ namespace AlphaServer.Controllers
             {
                 return NotFound();
             }
-                _catRepo.Remove(obj);
-                _catRepo.Save();
-                return RedirectToAction("Index");                        
+            TempData[WC.Success] = "Категория удалена";
+            _catRepo.Remove(obj);
+            _catRepo.Save();
+            return RedirectToAction("Index");                        
         }
 
     }

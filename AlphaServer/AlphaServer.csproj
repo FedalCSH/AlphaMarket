@@ -10,7 +10,6 @@
   <ItemGroup>
     <PackageReference Include="Blazorise.Icons.Bootstrap" Version="1.2.2" />
     <PackageReference Include="bootstrap" Version="5.2.3" />
-    <PackageReference Include="datatables.net" Version="1.13.4" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="jQuery" Version="3.6.4" />
     <PackageReference Include="MailKit" Version="4.0.0" />
@@ -36,6 +35,10 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\product\" />
     <Folder Include="wwwroot\templates\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\javascript\Inquiry.js" />
   </ItemGroup>
 
   <ItemGroup>

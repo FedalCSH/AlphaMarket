@@ -33,9 +33,11 @@ namespace AlphaServer.Controllers
             if (ModelState.IsValid) 
             {
                 _appTypeRepo.Add(obj);
+                TempData[WC.Success] = "OK";
                 _appTypeRepo.Save();
             return RedirectToAction("Index");
             }
+            TempData[WC.Error] = "Произошла ошибка!!!";
             return View(obj);
         }
         //GET - EDIT
@@ -60,9 +62,11 @@ namespace AlphaServer.Controllers
             if (ModelState.IsValid)
             {
                 _appTypeRepo.Update(obj);
+                TempData[WC.Success] = "OK";
                 _appTypeRepo.Save();
                 return RedirectToAction("Index");
             }
+            TempData[WC.Error] = "Произошла ошибка!!!";
             return View(obj);
         }
         //GET - Delete
@@ -90,6 +94,7 @@ namespace AlphaServer.Controllers
                 return NotFound();
             }
             _appTypeRepo.Remove(obj);
+            TempData[WC.Success] = "OK";
             _appTypeRepo.Save();
             return RedirectToAction("Index");
         }
